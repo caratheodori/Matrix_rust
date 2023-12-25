@@ -42,17 +42,6 @@ impl<T :Clone + Default + std::ops::Mul<Output = T> > Matrix<T>{
         }
         Matrix{state: v, row: m, col: n}
     }
-    pub fn scalar(&self, scalar: T) -> Matrix<T>{
-        let n: usize = self.get_row();
-        let m: usize = self.get_col();
-        let mut v: Vec<Vec<T>> = vec![vec![T::default(); self.get_row()]; self.get_col()];
-        for i in 0..m {
-            for j in 0..n{
-                v[i][j] = self.state[i][j].clone() * scalar.clone();
-            }
-        }
-        Matrix{state: v, row: n, col: m}
-    }
 }
 
 pub trait Add<RHS = Self>{
@@ -115,5 +104,18 @@ impl<T> Mul for Matrix<T> where T: std::ops::Mul<Output = T> + Clone + Default{
         Matrix{state: v3, row: self.get_col(), col: rhs.get_row()}
     }
 }
-
+impl<T> Mul<T> for Matrix<T> where T: std::ops::Mul<Output = T> + Clone + Default{
+    type Output = Matrix<T>;
+    fn Mul(&self,rhs: T) -> Self::Output {
+        let n: usize = self.get_row();
+        let m: usize = self.get_col();
+        let mut v: Vec<Vec<T>> = vec![vec![T::default(); self.get_row()]; self.get_col()];
+        for i in 0..m {
+            for j in 0..n{
+                v[i][j] = self.state[i][j].clone() * rhs.clone();
+            }
+        }
+        Matrix{state: v, row: n, col: m}
+    } 
+}
     
