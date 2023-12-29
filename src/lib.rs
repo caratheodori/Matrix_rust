@@ -42,6 +42,26 @@ impl<T :Clone + Default + std::ops::Mul<Output = T> > Matrix<T>{
         }
         Matrix{state: v, row: m, col: n}
     }
+    pub fn tensor(&self, rhs: &Matrix<T>) -> Matrix<T>{
+        let n1: usize = self.get_row();
+        let m1: usize = self.get_col();
+        let n2: usize = rhs.get_row();
+        let m2: usize = rhs.get_col();
+        let mut v: Vec<Vec<T>> = vec![vec![T::default(); n1*n2]; m1*m2];
+        for i in 0..m1 {
+            for j in 0..n1{
+                for k in 0..m2{
+                    for l in 0..n2{
+                        v[i*n2 + k][j*m2 + l] = self.state[i][j].clone() * rhs.state[k][l].clone();
+                    }
+                }
+            }
+        }
+        Matrix{state: v, row: n1*n2, col: m1*m2}
+    }
+    pub fn zero(&self) -> Matrix<T>{
+        Matrix{state: vec![vec![T::default(); self.get_row()]; self.get_col()], row: self.get_row(), col: self.get_col()}
+    }
 }
 
 pub trait Add<RHS = Self>{
