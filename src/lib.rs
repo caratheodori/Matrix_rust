@@ -23,14 +23,13 @@ impl<T :Clone + Default + std::ops::Mul<Output = T> > Matrix<T>{
     pub fn get_state(&self) -> &Vec<Vec<T>>{
         return &self.state;
     }
-    /*fn set_state(&mut self, state: Vec<Vec<T>>) -> Result<(),&'static str>{
-        if self.get_col() == state.len() && self.get_row() == state[0].len(){
-            self.state = state;
-            Ok(())
+    pub fn set_state(state: Vec<Vec<T>>, row: usize, col: usize) -> Result<Matrix<T>,&'static str>{
+        if col == state.len() && row == state[0].len(){
+            Ok(Matrix{state: state, row: row as usize, col: col as usize})
         }else {
             return Err("Both the matrix and the state are not the same size");
         }
-    }*/
+    }
     pub fn transpose(&self) -> Matrix<T>{
         let n: usize = self.get_row();
         let m: usize = self.get_col();
