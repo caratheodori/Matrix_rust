@@ -62,12 +62,6 @@ impl<T :Clone + Default + std::ops::Mul<Output = T> > Matrix<T>{
         Matrix{state: vec![vec![T::default(); self.get_row()]; self.get_col()], row: self.get_row(), col: self.get_col()}
     }
 }
-
-pub fn Set_state<T>(state: Vec<Vec<T>>, row: usize, col: usize) -> Result<Matrix<T>,&'static str>
-where T:Clone + Default + std::ops::Mul<Output = T>{
-    Matrix::set_state(state, row, col)
-}
-
 pub trait Add<RHS = Self>{
     type Output;
     fn Add(&self,rhs: RHS) -> Self::Output;
@@ -143,3 +137,7 @@ impl<T> Mul<T> for Matrix<T> where T: std::ops::Mul<Output = T> + Clone + Defaul
     } 
 }
     
+pub fn Set_state<T>(state: Vec<Vec<T>>, row: usize, col: usize) -> Result<Matrix<T>,&'static str>
+where T:Clone + Default + std::ops::Mul<Output = T>{
+    Matrix::set_state(state, row, col)
+}
