@@ -63,7 +63,7 @@ impl<T :Clone + Default + std::ops::Mul<Output = T> > Matrix<T>{
     }
 }
 
-pub fn Set_state<T>(state: Vec<Vec<T>>, row: usize, col: usize) -> Result<Matrix<T>,&'static str> 
+pub fn Set_state<T>(state: Vec<Vec<T>>, row: usize, col: usize) -> Result<Matrix<T>,&'static str>
 where T:Clone + Default + std::ops::Mul<Output = T>{
     Matrix::set_state(state, row, col)
 }
