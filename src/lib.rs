@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Matrix<T>{
     state: Vec<Vec<T>>,
     row: usize,
