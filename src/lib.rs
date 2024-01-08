@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Matrix<T>{
     state: Vec<Vec<T>>,
     row: usize,
@@ -142,4 +142,4 @@ impl<T> Mul<T> for Matrix<T> where T: std::ops::Mul<Output = T> + Clone + Defaul
         Matrix{state: v, row: n, col: m}
     } 
 }
-    
+
