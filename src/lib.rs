@@ -88,6 +88,11 @@ impl<T> Add for Matrix<T> where T: std::ops::Add<Output = T> + Clone + Default +
         Matrix{state: v3, row: self.get_row(), col: self.get_col()}
     }
 }
+impl <T: Clone + Default + std::ops::Mul<Output = T> > Clone for Matrix<T> {
+    fn clone(&self) -> Self {
+        Matrix{state: self.state.clone(), row: self.row, col: self.col}
+    }
+} 
 pub trait Sub<RHS = Self>{
     type Output;
     fn Sub(&self,rhs: RHS) -> Self::Output;
