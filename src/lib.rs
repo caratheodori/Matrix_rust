@@ -1,5 +1,4 @@
 #![allow(non_snake_case)]
-
 #[derive(Debug)]
 pub struct Matrix<T>{
     state: Vec<Vec<T>>,
@@ -68,6 +67,8 @@ impl<T :Clone + Default + std::ops::Mul<Output = T> > Matrix<T>{
         Matrix{state: vec![vec![T::default(); self.get_row()]; self.get_col()], row: self.get_row(), col: self.get_col()}
     }
 }
+
+
 pub trait Add<RHS = Self>{
     type Output;
     fn Add(&self,rhs: RHS) -> Self::Output;
@@ -89,10 +90,11 @@ impl<T> Add for Matrix<T> where T: std::ops::Add<Output = T> + Clone + Default +
     }
 }
 impl <T: Clone + Default + std::ops::Mul<Output = T> > Clone for Matrix<T> {
-    fn clone(&self) -> Self {
+    fn clone(&self) -> Matrix<T> {
         Matrix{state: self.state.clone(), row: self.row, col: self.col}
     }
 } 
+
 pub trait Sub<RHS = Self>{
     type Output;
     fn Sub(&self,rhs: RHS) -> Self::Output;
